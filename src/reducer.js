@@ -1,6 +1,13 @@
 import {DECREASE, INCREASE, CLEAR_CART, REMOVE, GET_TOTALS, TOGGLE_AMOUNT} from './actions';
+import cartItems from "./cart-items";
 
-function reducer(state, action){
+const initialStore = {
+  cart: cartItems,
+  total:0,
+  amount: 0
+};
+
+function reducer(state = initialStore, action){
 
   if(action.type === CLEAR_CART){
     return {...state, cart:[]}
@@ -10,7 +17,7 @@ function reducer(state, action){
         if(cartItem.id === action.payload.id){
           cartItem = {...cartItem, amount: cartItem.amount -1}
         }
-  
+
         return cartItem;
       });
     
@@ -67,11 +74,3 @@ function reducer(state, action){
   }
 
   export default reducer;
-
-  // switch(action.type){
-  //   case CLEAR_CART:
-  //     return {...state, cart:[]};
-  //     default: 
-  //       return state;
-  // }
-  
